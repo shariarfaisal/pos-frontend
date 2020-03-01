@@ -1,26 +1,35 @@
-import React from 'react'
+import React,{ Fragment } from 'react'
 
 const items = [
-  {id:1,name: 'Home'},
-  {id:2,name: 'Category',subItems:[
-    {id:1,name:'Create'},
-    {id:2,name:'Categories'},
+  {name: 'Home',link: '/'},
+  {name: 'Employee',subItems:[
+    {name:'Home',link: '/employee'},
+    {name:'Employee Type',link: '/employee/type'},
+    {name:'Create',link: '/employee/create'},
   ]},
-  {id:3,name: 'Product',subItems:[
-    {id:1,name:'Create'},
-    {id:2,name:'Employees'},
+  {name: 'Category',subItems:[
+    {name:'New Category',link: '/category/create'},
+    {name:'New Brand',link: '/brand/create'},
+    {name:'Brands',link: '/brand'},
+    {name:'Categories',link: '/category'},
+    {name:'Products',link: '/product'},
+    {name:'New Product',link: '/product/create'},
   ]},
-  {id:4,name: 'Branch',subItems:[
-    {id:1,name:'Create'},
-    {id:2,name:'Employees'},
+  {name: 'Branch',subItems:[
+    {name:'Create',link: ''},
+    {name:'Employees',link: ''},
   ]},
-  {id:5,name: 'Export',subItems:[
-    {id:1,name:'Create'},
-    {id:2,name:'Employees'},
+  {name: 'Export',subItems:[
+    {name:'Create',link: ''},
+    {name:'Employees',link: ''},
   ]},
-  {id:6,name: 'Import',subItems:[
-    {id:1,name:'Create'},
-    {id:2,name:'Employees'},
+  {name: 'Import',subItems:[
+    {name:'Create',link: ''},
+    {name:'Employees',link: ''},
+  ]},
+  {name: 'Vendor',subItems:[
+    {name:'Vendors',link: '/vendor'},
+    {name:'Create',link: '/vendor/create'},
   ]},
 ]
 
@@ -34,8 +43,8 @@ return(
         <ul className="nav flex-column">
 
           {
-            items.map(i => {
-              return <Item key={i} {...i} />
+            items.map((item,index) => {
+              return <Item key={index} {...item} />
             })
           }
 
@@ -45,14 +54,19 @@ return(
   )
 }
 
-const Item = ({ name, subItems }) => (
+const Item = ({ name, link, subItems }) => (
   <li className="nav-item">
-    <a data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex" href="/"><span className="mr-auto">{name}</span> {subItems && <i className="fa fa-sort-down"></i> }</a>
-    {subItems && <ul className="nav flex-column ml-4 pt-0 collapse" id={`${name}Collapse`}>
-      {Object.keys(subItems).length > 0 && subItems.map(i => {
-        return <li className="nav-item"><a className="nav-link text-light" href="#">{i.name}</a></li>
-      })}
-    </ul>}
+    {!link ?
+      <Fragment>
+        <div style={{cursor: 'pointer'}} data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex"><span className="mr-auto">{name}</span> <i className="fa fa-sort-down"></i></div>
+        {subItems && <ul className="nav flex-column ml-4 pt-0 collapse" id={`${name}Collapse`}>
+          {Object.keys(subItems).length > 0 && subItems.map((item,index) => {
+            return <li key={index} className="nav-item"><a className="nav-link text-light" href={item.link}>{item.name}</a></li>
+          })}
+        </ul>}
+      </Fragment> :
+      <a href={link} data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex" href={link}><span className="mr-auto">{name}</span></a>
+    }
   </li>
 )
 

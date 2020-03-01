@@ -4,7 +4,7 @@ import Content from '../components/core/Content'
 
 const Core = ({ children }) => {
 return(
-  <div class="app-row d-flex">
+  <div className="app-row d-flex">
     <Controller />
     <Content>
       {children}

@@ -1,0 +1,27 @@
+.employee-create{
+
+  &--form{
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid lightblue;
+  }
+
+  &--errbox{
+    background: lightblue;
+    border-radius: 5px;
+    margin: 15px 10px;
+    color: red;
+    font-family: 'Source Sans Pro', ;
+    p{
+      margin: 0;
+    }
+  }
+}
+
+
+.employee-type{
+
+  &--items{
+    padding: 20px 10px;
+  }
+}
