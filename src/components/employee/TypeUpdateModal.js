@@ -1,25 +1,23 @@
-import React,{ useState } from 'react'
+import React,{ useState, useReducer, useContext } from 'react'
 import { Modal } from 'react-bootstrap'
-import axios from 'axios'
+import { EmployeeTypeContext } from '../../store/EmployeeTypeContext'
 
 const TypeUpdateModal = ({ id, name: nm, show, setShow }) => {
   const [name,setName] = useState(nm)
   const [error,setError] = useState(null)
   const [success,setSuccess] = useState(null)
 
+  const context = useContext(EmployeeTypeContext)
+
   const submitHandler = async e => {
     e.preventDefault()
     if(name){
-      try{
-        const updated = await axios.put(`http://localhost:1000/api/employeeType/${id}`,{ name })
-        if(updated){
-          setError('')
-          setSuccess('Data Updated!')
-        }
-      }catch(err){
-        setSuccess('')
-        setError(err.response.data.msg)
-      }
+      const res = await context.getUpdate(id,{ name })
+      if(res.success){
+        context.setReload(true)
+        setSuccess(res.success)
+        setError('')
+      }else{ setSuccess('');setError(res.error);}
     }
   }
 

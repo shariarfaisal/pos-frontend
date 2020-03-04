@@ -1,25 +1,26 @@
-import React,{ useState } from 'react'
-import axios from 'axios'
-
+import React,{ useState, useContext } from 'react'
+import { EmployeeTypeContext } from '../../store/EmployeeTypeContext'
 
 const Type = (props) => {
   const [name,setName] = useState('')
   const [error,setError] = useState(null)
   const [success,setSuccess] = useState(null)
 
+  const context = useContext(EmployeeTypeContext)
+
   const submitHandler = async e => {
     e.preventDefault()
     if(name){
-      try{
-        const type = await axios.post('http://localhost:1000/api/employeeType/',{ name })
-        if(type){
-          setError('')
-          setSuccess(`${type.data.name} type created!`)
-          setName('')
-        }
-      }catch(err){
+      const type = await context.getPost({ name })
+      if(type.success){
+        context.setReload(true)
+        setError('')
+        setSuccess(`${type.data.name} type created!`)
+        setName('')
+      }
+      if(type.error){
         setSuccess('')
-        setError(err.response.data.msg)
+        setError(type.error)
       }
     }
   }
