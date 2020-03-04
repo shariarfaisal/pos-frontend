@@ -1,17 +1,20 @@
 import React from 'react'
 import Core from '../../layouts/Core'
 import Home from '../../components/employee/Home'
+import EmployeeContextProvider from '../../store/EmployeeContext'
 
 
 const Employee = (props) => {
-return(
-  <Core>
-    <div className="employee-create">
-      <div className="row justify-content-center">
-          <Home />
-      </div>
-    </div>
-  </Core>
+  return(
+    <EmployeeContextProvider>
+      <Core>
+        <div className="employee-create">
+          <div className="row justify-content-center">
+            <Home />
+          </div>
+        </div>
+      </Core>
+    </EmployeeContextProvider>
   )
 }
 export default Employee
