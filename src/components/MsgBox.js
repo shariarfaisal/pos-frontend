@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{ memo } from 'react'
 
 const MsgBox = ({ error, success }) => {
 return(
-  <div className="employee-create--errbox p-3">
+  (error || success ) && <div className="employee-create--errbox p-3">
     {error && Object.keys(error).map((item,i) => {
       return <p key={i}>{error[item]}</p>
     })}
@@ -10,4 +10,4 @@ return(
   </div>
   )
 }
-export default MsgBox
+export default memo(MsgBox)

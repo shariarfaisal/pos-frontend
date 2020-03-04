@@ -1,7 +1,7 @@
 import React,{ useState, useEffect, useContext } from 'react'
 import { EmployeeTypeContext } from '../../store/EmployeeTypeContext'
 import { EmployeeContext } from '../../store/EmployeeContext'
-import MsgBox from './MsgBox'
+import MsgBox from '../MsgBox'
 import axios from 'axios'
 import Input from './Input'
 
@@ -47,7 +47,7 @@ const Create = (props) => {
 
   return(
     <div className="col-md-10 col-lg-8 employee-create--form bg-light">
-      {(error || success) && <MsgBox error={error} success={success}/>}
+      <MsgBox error={error} success={success}/>
       <form onSubmit={submitHandler}>
         <div className="row py-3">
           <Input

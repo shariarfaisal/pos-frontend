@@ -1,47 +1,33 @@
-import React,{ useState, useContext } from 'react'
+import React,{ useEffect, useState, useContext } from 'react'
+import Thead from './Thead'
+import TableRow from './TableRow'
 import { EmployeeTypeContext } from '../../store/EmployeeTypeContext'
+import TypeCreate from './TypeCreate'
+import CreateBox from '../CreateBox'
 
-const Type = (props) => {
-  const [name,setName] = useState('')
-  const [error,setError] = useState(null)
-  const [success,setSuccess] = useState(null)
 
+const Type = ({ size }) => {
+  const [show,setShow] = useState(false)
   const context = useContext(EmployeeTypeContext)
 
-  const submitHandler = async e => {
-    e.preventDefault()
-    if(name){
-      const type = await context.getPost({ name })
-      if(type.success){
-        context.setReload(true)
-        setError('')
-        setSuccess(`${type.data.name} type created!`)
-        setName('')
-      }
-      if(type.error){
-        setSuccess('')
-        setError(type.error)
-      }
-    }
-  }
-
   return(
-    <div className="col-md-6 light-border .employee-type--create">
-      <form onSubmit={submitHandler}>
-        {(error || success) && <p className={`text-center py-3 text-${success ? 'success' : 'danger'} m-0`}>{success ? success : error}</p>}
-        <div className="form-group">
-          <label htmlFor="name">Employee Type</label>
-          <input
-            onChange={e => setName(e.target.value)}
-            type="text"
-            className="form-control form-control-sm"
-            placeholder="Type Name"
-            value={name}
-          />
+    <div className="col-10 employee-type--items mt-2 p-0">
+      <CreateBox setShow={setShow} title="Create New Employee">
+        <TypeCreate show={show} setShow={setShow} />
+      </CreateBox>
+      <div className="row">
+        <div className="col-md-10 col-lg-8 ">
+          <table className="table border">
+            <Thead />
+            <tbody>
+              {context && context.employeeTypes.map((item,i) => <TableRow key={item._id} {...item} i={i} />)}
+            </tbody>
+          </table>
         </div>
-        <button type="submit" className="btn btn-sm btn-info px-4">Submit</button>
-      </form>
+      </div>
     </div>
     )
 }
+
+
 export default Type

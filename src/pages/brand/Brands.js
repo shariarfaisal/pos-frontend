@@ -1,16 +1,20 @@
 import React from 'react'
 import Core from '../../layouts/Core'
 import BrandsBody from '../../components/brand/Brands'
+import BrandContextProvider from '../../store/BrandContext'
+
 
 const Brands = (props) => {
 return(
-  <Core>
-    <div className="employee-create">
-      <div className="row justify-content-center">
+  <BrandContextProvider>
+    <Core>
+      <div className="employee-create">
+        <div className="row justify-content-center">
           <BrandsBody />
+        </div>
       </div>
-    </div>
-  </Core>
+    </Core>
+  </BrandContextProvider>
   )
 }
 export default Brands

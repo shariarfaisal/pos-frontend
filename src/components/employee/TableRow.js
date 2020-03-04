@@ -8,11 +8,11 @@ import TypeDeleteModal from './TypeDeleteModal'
 const TableRow = ({ i, _id, name }) => {
   const [show,setShow] = useState(false)
   const [showD,setShowD] = useState(false)
-  
+
   return(
     <Fragment>
       <TypeUpdateModal id={_id} name={name} show={show} setShow={setShow} />
-      <TypeDeleteModal id={_id} show={showD} setShow={setShowD} />
+      <TypeDeleteModal id={_id} name={name} show={showD} setShow={setShowD} />
       <tr>
         <th scope="row">{i+1}</th>
         <td><a className="text-dark" href={`/type/${_id}`}>{name}</a></td>

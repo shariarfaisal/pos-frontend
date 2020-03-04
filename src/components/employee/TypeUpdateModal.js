@@ -1,12 +1,13 @@
 import React,{ useState, useReducer, useContext } from 'react'
 import { Modal } from 'react-bootstrap'
 import { EmployeeTypeContext } from '../../store/EmployeeTypeContext'
+import MsgBox from '../MsgBox'
+
 
 const TypeUpdateModal = ({ id, name: nm, show, setShow }) => {
   const [name,setName] = useState(nm)
   const [error,setError] = useState(null)
   const [success,setSuccess] = useState(null)
-
   const context = useContext(EmployeeTypeContext)
 
   const submitHandler = async e => {
@@ -34,7 +35,7 @@ const TypeUpdateModal = ({ id, name: nm, show, setShow }) => {
           <div>
             <h4 className="text-center text-info mb-4">Update</h4>
             <form onSubmit={submitHandler}>
-              {(error || success) && <p className={`text-center py-3 text-${success ? 'success' : 'danger'} m-0`}>{success ? success : error}</p>}
+              <MsgBox error={error} success={success} />
               <div className="form-group">
                 <input
                   onChange={e => setName(e.target.value)}
@@ -45,8 +46,8 @@ const TypeUpdateModal = ({ id, name: nm, show, setShow }) => {
                 />
               </div>
               <div className="d-flex justify-content-end">
-                <button type="submit" className="btn btn-sm btn-info px-4 mx-2">Submit</button>
-                <button onClick={e => setShow(false)} type="button" className="btn btn-sm btn-danger mx-2 px-4">Close</button>
+                <button type="submit" className="btn btn-sm btn-light text-info px-4 mx-2">Submit</button>
+                <button onClick={e => setShow(false)} type="button" className="btn btn-sm btn-light text-danger mx-2 px-4">Close</button>
               </div>
             </form>
           </div>

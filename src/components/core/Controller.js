@@ -8,10 +8,8 @@ const items = [
     {name:'Create',link: '/employee/create'},
   ]},
   {name: 'Category',subItems:[
-    {name:'New Category',link: '/category/create'},
-    {name:'New Brand',link: '/brand/create'},
+    {name:'Category',link: '/category'},
     {name:'Brands',link: '/brand'},
-    {name:'Categories',link: '/category'},
     {name:'Products',link: '/product'},
     {name:'New Product',link: '/product/create'},
   ]},

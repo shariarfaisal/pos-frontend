@@ -1,35 +1,26 @@
-import React from 'react'
+import React,{ useState, useContext } from 'react'
+import { CategoryContext } from '../../store/CategoryContext'
+import Item from './Item'
+import Create from './Create'
+import CreateBox from '../CreateBox'
+
+
 
 const Items = (props) => {
-return(
-  <div className="category-items col-12 col-xl-11 my-5">
-    <div className="row">
-      <div className="col-sm-6 col-md-4 col-lg-3 my-2">
-        <div className="p-2 light-border">
-          <h6><a className="text-dark" href="/products/123j4k5j4kjbjk534jk3">Electronics</a></h6>
-          <small><a className="text-dark" href="">products</a> <span className="badge badge-info">10</span></small>
-        </div>
-      </div>
-      <div className="col-sm-6 col-md-4 col-lg-3 my-2">
-        <div className="p-2 light-border">
-          <h6>Cloths</h6>
-          <small><a className="text-dark" href="">products</a> <span className="badge badge-info">10</span></small>
-        </div>
-      </div>
-      <div className="col-sm-6 col-md-4 col-lg-3 my-2">
-        <div className="p-2 light-border">
-          <h6>Furniture</h6>
-          <small><a className="text-dark" href="">products</a> <span className="badge badge-info">10</span></small>
-        </div>
-      </div>
-      <div className="col-sm-6 col-md-4 col-lg-3 my-2">
-        <div className="p-2 light-border">
-          <h6>Vegitable</h6>
-          <small><a className="text-dark" href="">products</a> <span className="badge badge-info">10</span></small>
-        </div>
+  const [show,setShow] = useState(false)
+  const context = useContext(CategoryContext)
+
+  return(
+    <div className="category-items col-12 col-xl-11 mt-2 mb-5">
+      <CreateBox setShow={setShow} title="Create New">
+        <Create show={show} setShow={setShow}/>
+      </CreateBox>
+      <div className="row">
+        {context && context.categories.map((item,i) => {
+          return <Item key={i} {...item} />
+        })}
       </div>
     </div>
-  </div>
   )
 }
 export default Items

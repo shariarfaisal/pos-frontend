@@ -5,15 +5,13 @@ import Login from './pages/Login'
 import Employee from './pages/employee/Index'
 import EmployeeType from './pages/employee/Type'
 import EmployeeCreate from './pages/employee/Create'
-import Categories from './pages/category/Category'
-import CategoryCreate from './pages/category/Create'
+import Category from './pages/category/Category'
 import Products from './pages/product/Products'
 import ProductCreate from './pages/product/Create'
 import ProductItem from './pages/product/ProductItem'
 import VendorCreate from './pages/vendor/Create'
 import Vendors from './pages/vendor/Vendors'
 import Brands from './pages/brand/Brands'
-import BrandCreate from './pages/brand/Create'
 import ItemCreate from './pages/item/Create'
 import Items from './pages/item/Items'
 import Item from './pages/item/Item'
@@ -32,15 +30,13 @@ const routes = [
   {path: '/employee',component: Employee},
   {path: '/employee/type',component: EmployeeType},
   {path:'/employee/create',component: EmployeeCreate},
-  {path:'/category',component: Categories},
-  {path:'/category/create',component: CategoryCreate},
+  {path:'/category',component: Category},
   {path:'/product/create',component: ProductCreate},
   {path:'/product',component: Products},
   {path:'/product/:id',component: ProductItem},
   {path:'/vendor/create',component: VendorCreate},
   {path:'/vendor',component: Vendors},
   {path:'/brand',component: Brands},
-  {path:'/brand/create',component: BrandCreate},
   {path:'/item/create',component: ItemCreate},
   {path:'/item',component: Items},
   {path:'/item/:id',component: Item},
