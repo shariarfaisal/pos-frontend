@@ -9,7 +9,6 @@ import Category from './pages/category/Category'
 import Products from './pages/product/Products'
 import Product from './pages/product/Product'
 import Item from './pages/product/Item'
-import VendorCreate from './pages/vendor/Create'
 import Vendors from './pages/vendor/Vendors'
 import Brands from './pages/brand/Brands'
 
@@ -31,7 +30,6 @@ const routes = [
   {path:'/category/:catId',component: Products},
   {path:'/category/:catId/:proId',component: Product},
   {path:'/category/:catId/:proId/:itemId',component: Item},
-  {path:'/vendor/create',component: VendorCreate},
   {path:'/vendor',component: Vendors},
   {path:'/brand',component: Brands}
 ]

@@ -1,16 +1,21 @@
 import React from 'react'
 import Core from '../../layouts/Core'
 import VendorsBody from '../../components/vendor/Vendors'
+import VendorContextProvider from '../../store/VendorContext'
+
 
 const Vendors = (props) => {
 return(
-  <Core>
-    <div className="employee-create">
-      <div className="row justify-content-center">
+  <VendorContextProvider>
+    <Core>
+      <div className="employee-create">
+        <div className="row justify-content-center">
           <VendorsBody />
+        </div>
       </div>
-    </div>
-  </Core>
+    </Core>
+  </VendorContextProvider>
   )
 }
+
 export default Vendors

@@ -12,8 +12,7 @@ const items = [
     {name:'Brands',link: '/brand'}
   ]},
   {name: 'Branch',subItems:[
-    {name:'Create',link: ''},
-    {name:'Employees',link: ''},
+    {name:'Branches',link: '/branch'},
   ]},
   {name: 'Export',subItems:[
     {name:'Create',link: ''},
@@ -24,8 +23,7 @@ const items = [
     {name:'Employees',link: ''},
   ]},
   {name: 'Vendor',subItems:[
-    {name:'Vendors',link: '/vendor'},
-    {name:'Create',link: '/vendor/create'},
+    {name:'Vendors',link: '/vendor'}
   ]},
 ]
 

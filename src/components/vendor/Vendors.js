@@ -1,37 +1,24 @@
-import React from 'react'
+import React,{ useState, useContext } from 'react'
+import { VendorContext }  from '../../store/VendorContext'
+import VendorSearch from './VendorSearch'
+import VendorItem from './VendorItem'
+import Create from './Create'
+import CreateBox from '../CreateBox'
 
 const Vendors = (props) => {
-return(
-  <div className="col-xl-10">
-    <div className="list-group">
+  const [show,setShow] = useState(false)
+  const context = useContext(VendorContext)
 
-      <div className="list-group-item border-0 p-3 my-2 w-75 mx-auto">
-        <div>
-          <form className="d-flex">
-            <input type="" name="" value="" placeholder="Search" className="form-control form-control-sm" />
-            <button type="button" className="btn btn-sm btn-info px-4 mx-2">search</button>
-          </form>
-        </div>
+  return(
+    <div className="col-xl-10">
+      <CreateBox setShow={setShow} title="Create New">
+        <Create show={show} setShow={setShow}/>
+      </CreateBox>
+      <div className="list-group">
+        <VendorSearch />
+        {context.vendors.map((vendor,i) => <VendorItem key={i} {...vendor} /> )}
       </div>
-
-      <div className="list-group-item light-border p-3 my-2 rounded-0">
-        <h4><a className="text-info" href="/">Mezbah Uddin</a></h4>
-        <small className="text-muted d-block"> <i className="fa fa-phone text-info"></i> 01822531439</small>
-        <small className="text-muted d-block"> <i className="fa fa-envelope text-info"></i> mezbah@gmail.com</small>
-      </div>
-      <div className="list-group-item light-border p-3 my-2 rounded-0">
-        <h4><a className="text-info" href="/">Mezbah Uddin</a></h4>
-        <small className="text-muted d-block"> <i className="fa fa-phone text-info"></i> 01822531439</small>
-        <small className="text-muted d-block"> <i className="fa fa-envelope text-info"></i> mezbah@gmail.com</small>
-      </div>
-      <div className="list-group-item light-border p-3 my-2 rounded-0">
-        <h4><a className="text-info" href="/">Mezbah Uddin</a></h4>
-        <small className="text-muted d-block"> <i className="fa fa-phone text-info"></i> 01822531439</small>
-        <small className="text-muted d-block"> <i className="fa fa-envelope text-info"></i> mezbah@gmail.com</small>
-      </div>
-
     </div>
-  </div>
   )
 }
 export default Vendors
