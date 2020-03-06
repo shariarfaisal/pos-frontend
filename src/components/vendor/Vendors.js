@@ -10,12 +10,11 @@ const Vendors = (props) => {
   const context = useContext(VendorContext)
 
   return(
-    <div className="col-xl-10">
+    <div className="col-12 p-3">
       <CreateBox setShow={setShow} title="Create New">
         <Create show={show} setShow={setShow}/>
       </CreateBox>
-      <div className="list-group">
-        <VendorSearch />
+      <div className="row">
         {context.vendors.map((vendor,i) => <VendorItem key={i} {...vendor} /> )}
       </div>
     </div>

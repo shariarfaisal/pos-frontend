@@ -11,6 +11,7 @@ import Product from './pages/product/Product'
 import Item from './pages/product/Item'
 import Vendors from './pages/vendor/Vendors'
 import Brands from './pages/brand/Brands'
+import Branches from './pages/branch/Branches'
 
 import tokenHandler from './utils/tokenHandler'
 
@@ -31,7 +32,8 @@ const routes = [
   {path:'/category/:catId/:proId',component: Product},
   {path:'/category/:catId/:proId/:itemId',component: Item},
   {path:'/vendor',component: Vendors},
-  {path:'/brand',component: Brands}
+  {path:'/brand',component: Brands},
+  {path:'/branch',component: Branches},
 ]
 
 if(token){
