@@ -1,31 +1,29 @@
 import React,{ useState, useContext } from 'react'
-import { ProductItemContext } from '../../../store/ProductItemContext'
-import { BrandContext } from '../../../store/BrandContext'
+import { ProductSubItemContext } from '../../../store/ProductSubItemContext'
 import MsgBox from '../../MsgBox'
-import { withRouter } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import CustomModal from '../../CustomModal'
 
 
-const Create = ({ show, setShow, match }) => {
+const Create = ({ show, setShow }) => {
+  const { itemId } =  useParams()
   const [name,setName] = useState('')
   const [code,setCode] = useState('')
-  const [brand,setBrand] = useState('')
   const [description,setDescription] = useState('')
   const image = 'image.jpg'
-  const product = match.params.proId
+
   const [success,setSuccess] = useState('')
   const [error,setError] = useState('')
-  const context = useContext(ProductItemContext)
-  const brandContext = useContext(BrandContext)
+  const context = useContext(ProductSubItemContext)
 
   const submitHandler = async e => {
     e.preventDefault()
-    if(name && code && description && brand && image && product){
-      const items = await context.getPost({ name,  code, description, image, product, brand })
+    if(name && code && description && itemId && image){
+      const items = await context.getPost({ name,  code, description, image, item: itemId })
       if(items.success){
         setError('')
         setSuccess(items.success)
-        context.setItems([...context.items,items.data.data])
+        context.setSubItems([...context.subItems,items.data.data])
         setName('')
         setCode('')
         setDescription('')
@@ -38,7 +36,7 @@ const Create = ({ show, setShow, match }) => {
 
   return(
     <CustomModal
-      title="Create New Item"
+      title="Create New Sub Item"
       show={show}
       setShow={setShow}
       submitHandler={submitHandler}
@@ -69,15 +67,6 @@ const Create = ({ show, setShow, match }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="brand">Brand</label>
-          <select className="form-control form-control-sm" value={brand} onChange={e => setBrand(e.target.value)}>
-            <option>Select Brand</option>
-            {brandContext.brands.map((b,i) => {
-              return <option key={i} value={b._id}>{b.name}</option>
-            })}
-          </select>
-        </div>
-        <div className="form-group">
           <label htmlFor="description">Description</label>
           <textarea
             className="form-control"
@@ -93,4 +82,4 @@ const Create = ({ show, setShow, match }) => {
   )
 }
 
-export default withRouter(Create)
+export default Create
