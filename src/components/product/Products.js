@@ -1,21 +1,26 @@
-import React from 'react'
+import React,{ useState, useContext } from 'react'
+import { withRouter } from 'react-router-dom'
+import CreateBox from '../CreateBox'
+import Create from './Create'
+import { ProductContext } from '../../store/ProductContext'
+import ProductItem from './ProductItem'
 
-const Products = (props) => {
-return(
-  <div className="col-lg-10">
-    <div className="list-group">
+const Products = ({ match }) => {
+  const [show,setShow] = useState(false)
+  const context = useContext(ProductContext)
 
-      <div className="list-group-item light-border p-3 my-2 rounded-0">
-        <h4><a className="text-info" href="/">Mobile</a></h4>
-        <small><a href="">items <span className="badge badge-info">10</span></a></small>
+
+  return(
+    <div className="col-lg-10">
+      <CreateBox setShow={setShow} title="Create New Product">
+        <Create category={match.params.catId} show={show} setShow={setShow} />
+      </CreateBox>
+      <div className="row">
+        {context.products.map((product,i) => {
+          return <ProductItem key={i} {...product} />
+        })}
       </div>
-      <div className="list-group-item light-border p-3 my-2 rounded-0">
-        <h4><a className="text-info" href="/">Laptop</a></h4>
-        <small><a href="">items <span className="badge badge-info">10</span></a></small>
-      </div>
-
     </div>
-  </div>
   )
 }
-export default Products
+export default withRouter(Products)

@@ -1,24 +1,53 @@
-import React from 'react'
+import React,{ useState, useContext } from 'react'
+import { ProductContext } from '../../store/ProductContext'
+import { CategoryContext } from '../../store/CategoryContext'
+import CustomModal from '../CustomModal'
+import MsgBox from '../MsgBox'
 
-const Create = (props) => {
-return(
-  <div className="col-md-10 col-lg-8 light-border">
-    <form>
-      <div className="form-group">
-        <label htmlFor="name">Product Name</label>
-        <input type="text" className="form-control form-control-sm" placeholder="Product Name" name="" value="" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="name">Product Category</label>
-        <select className="form-control form-control-sm">
-          <option value="">Select One</option>
-          <option value="1">Electronics</option>
-          <option value="1">Cloths</option>
-        </select>
-      </div>
-      <button type="submit" className="btn btn-sm btn-info px-4">Submit</button>
-    </form>
-  </div>
+const Create = ({ category, show, setShow }) => {
+  const [name,setName] = useState('')
+  // const [category,setCategory] = useState('')
+  const [success,setSuccess] = useState('')
+  const [error,setError] = useState('')
+  const categoryContext = useContext(CategoryContext)
+  const context = useContext(ProductContext)
+
+  const submitHandler = async e => {
+    e.preventDefault()
+    if(name && category){
+      const product = await context.getPost({ name, category })
+      if(product.success){
+        setSuccess(product.success)
+        context.setProducts([...context.products,product.data.data])
+        setName('');
+      }else{
+        setError(product.error)
+      }
+    }
+  }
+
+  return(
+    <CustomModal
+        show={show}
+        setShow={setShow}
+        title="Create New Item"
+        submitHandler={submitHandler}
+      >
+      <MsgBox error={error} success={success} />
+        <div className="form-group">
+          <label htmlFor="name">Product Name</label>
+          <input
+            type="text"
+            className="form-control form-control-sm"
+            placeholder="Product Name"
+            id="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </div>
+    </CustomModal>
   )
 }
+
+
 export default Create

@@ -9,9 +9,7 @@ const items = [
   ]},
   {name: 'Category',subItems:[
     {name:'Category',link: '/category'},
-    {name:'Brands',link: '/brand'},
-    {name:'Products',link: '/product'},
-    {name:'New Product',link: '/product/create'},
+    {name:'Brands',link: '/brand'}
   ]},
   {name: 'Branch',subItems:[
     {name:'Create',link: ''},

@@ -7,14 +7,10 @@ import EmployeeType from './pages/employee/Type'
 import EmployeeCreate from './pages/employee/Create'
 import Category from './pages/category/Category'
 import Products from './pages/product/Products'
-import ProductCreate from './pages/product/Create'
-import ProductItem from './pages/product/ProductItem'
+import Product from './pages/product/Product'
 import VendorCreate from './pages/vendor/Create'
 import Vendors from './pages/vendor/Vendors'
 import Brands from './pages/brand/Brands'
-import ItemCreate from './pages/item/Create'
-import Items from './pages/item/Items'
-import Item from './pages/item/Item'
 
 import tokenHandler from './utils/tokenHandler'
 
@@ -31,15 +27,11 @@ const routes = [
   {path: '/employee/type',component: EmployeeType},
   {path:'/employee/create',component: EmployeeCreate},
   {path:'/category',component: Category},
-  {path:'/product/create',component: ProductCreate},
-  {path:'/product',component: Products},
-  {path:'/product/:id',component: ProductItem},
+  {path:'/category/:catId',component: Products},
+  {path:'/category/:catId/:proId',component: Product},
   {path:'/vendor/create',component: VendorCreate},
   {path:'/vendor',component: Vendors},
-  {path:'/brand',component: Brands},
-  {path:'/item/create',component: ItemCreate},
-  {path:'/item',component: Items},
-  {path:'/item/:id',component: Item},
+  {path:'/brand',component: Brands}
 ]
 
 if(token){

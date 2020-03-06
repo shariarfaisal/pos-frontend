@@ -7,25 +7,19 @@ class Custom{
   }
 
 // Get All Items
-  getItems = async (set) => {
-    const data = await axios.get(this.link)
+  getItems = async (set,payload='') => {
+    const data = await axios.get(`${this.link}${payload}`)
     if(data){
       set(data.data)
     }
   }
 
 // Get One Item
-  getItem = async (id) => {
-    let [success,error, data ] = ['','']
-    try{
-      data = await axios.get(`${this.link}/${id}`)
-      if(data){
-        success = 'ok!'
-      }
-    }catch(err){
-      error = err.response.data
+  getItem = async (id,set) => {
+    const data = await axios.get(`${this.link}/${id}`)
+    if(data){
+      set(data.data)
     }
-    return { success, error, data: data }
   }
 
 // Get Post Item
@@ -61,7 +55,7 @@ class Custom{
   }
 
 
-// Get Delete By Id 
+// Get Delete By Id
   getDelete = async (id) => {
     let [success,error, deleted ] = ['','']
     try{
