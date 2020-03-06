@@ -1,7 +1,9 @@
 import React,{ Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import ControllerItem from './ControllerItem'
 
 const items = [
-  {name: 'Home',link: '/'},
+  {name: 'Home',link: '/',subItems:[]},
   {name: 'Employee',subItems:[
     {name:'Home',link: '/employee'},
     {name:'Employee Type',link: '/employee/type'},
@@ -35,34 +37,15 @@ return(
       </div>
       <div className="items">
         <ul className="nav flex-column">
-
           {
-            items.map((item,index) => {
-              return <Item key={index} {...item} />
-            })
+            items.map((item,index) => <ControllerItem key={index} {...item} /> )
           }
-
         </ul>
       </div>
     </div>
   )
 }
 
-const Item = ({ name, link, subItems }) => (
-  <li className="nav-item">
-    {!link ?
-      <Fragment>
-        <div style={{cursor: 'pointer'}} data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex"><span className="mr-auto">{name}</span> <i className="fa fa-sort-down"></i></div>
-        {subItems && <ul className="nav flex-column ml-4 pt-0 collapse" id={`${name}Collapse`}>
-          {Object.keys(subItems).length > 0 && subItems.map((item,index) => {
-            return <li key={index} className="nav-item"><a className="nav-link text-light" href={item.link}>{item.name}</a></li>
-          })}
-        </ul>}
-      </Fragment> :
-      <a href={link} data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex" href={link}><span className="mr-auto">{name}</span></a>
-    }
-  </li>
-)
 
 
 export default Controller

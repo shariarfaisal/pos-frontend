@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 const Content = ({ children }) => {
 return(
@@ -12,9 +14,9 @@ return(
           <li className="nav-item  custom-dropdown">
             <a className="nav-link" href="#"> <i className="fa fa-user"></i> shariarfaisal</a>
             <ul className="custom-dropdown--menu bg-info">
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><Link to="/profile">Profile</Link></li>
+              <li><Link to="#">Settings</Link></li>
+              <li><Link to="#">Logout</Link></li>
             </ul>
           </li>
         </ul>

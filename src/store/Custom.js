@@ -14,6 +14,13 @@ class Custom{
     }
   }
 
+// Get Self Info
+getMe = async (set) => {
+  const data = await axios.get(`${this.link}/me`)
+  if(data){
+    set(data.data)
+  }
+}
 // Get One Item
   getItem = async (id,set) => {
     const data = await axios.get(`${this.link}/${id}`)
