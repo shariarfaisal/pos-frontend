@@ -1,15 +1,15 @@
 import React from 'react'
-import Core from '../../layouts/Core'
+import BranchLayout from '../layouts/BranchLayout'
 
 const Home = (props) => {
 return(
-  <Core>
+  <BranchLayout>
     <div className="employee-create">
       <div className="row justify-content-center">
-        
+
       </div>
     </div>
-  </Core>
+  </BranchLayout>
   )
 }
 export default Home

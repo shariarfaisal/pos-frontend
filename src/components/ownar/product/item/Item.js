@@ -1,5 +1,5 @@
 import React from 'react'
-import SubItems from '../../subItem/SubItems'
+import SubItems from '../subItem/SubItems'
 
 
 const Item = (props) => {
