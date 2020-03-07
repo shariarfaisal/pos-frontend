@@ -1,7 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import CreateCategory from '../../components/category/Create'
-import Items from '../../components/category/Items'
+import Items from '../../components/ownar/category/Items'
 import CategoryContextProvider from '../../store/CategoryContext'
 
 

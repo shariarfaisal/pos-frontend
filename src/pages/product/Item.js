@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import ItemBody from '../../components/product/item/Item'
+import ItemBody from '../../components/ownar/product/item/Item'
 import ProductSubItemContextProvider from '../../store/ProductSubItemContext'
 
 

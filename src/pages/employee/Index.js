@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import Home from '../../components/employee/Home'
+import Home from '../../components/ownar/employee/Home'
 import EmployeeContextProvider from '../../store/EmployeeContext'
 
 

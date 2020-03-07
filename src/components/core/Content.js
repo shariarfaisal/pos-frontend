@@ -1,6 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+const getLogout = e => {
+  const employee = localStorage.getItem('employee-token')
+  if(employee){
+    localStorage.removeItem('employee-token')
+  }else{
+    localStorage.removeItem('branch-token')
+  }
+  window.location = '/'
+}
 
 const Content = ({ children }) => {
 return(
@@ -16,7 +25,7 @@ return(
             <ul className="custom-dropdown--menu bg-info">
               <li><Link to="/profile">Profile</Link></li>
               <li><Link to="#">Settings</Link></li>
-              <li><Link to="#">Logout</Link></li>
+              <li onClick={getLogout}><Link to="#">Logout</Link></li>
             </ul>
           </li>
         </ul>

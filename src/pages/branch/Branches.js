@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import BranchesBody from '../../components/branch/Branches'
+import BranchesBody from '../../components/ownar/branch/Branches'
 import BranchContextProvider from '../../store/BranchContext'
 
 const Branches = (props) => {

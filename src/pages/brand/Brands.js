@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import BrandsBody from '../../components/brand/Brands'
+import BrandsBody from '../../components/ownar/brand/Brands'
 import BrandContextProvider from '../../store/BrandContext'
 
 

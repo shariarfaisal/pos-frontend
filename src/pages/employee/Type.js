@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import Type from '../../components/employee/Type'
+import Type from '../../components/ownar/employee/Type'
 import EmployeeTypeContextProvider from '../../store/EmployeeTypeContext'
 
 

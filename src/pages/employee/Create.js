@@ -1,6 +1,6 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import CreateBody from '../../components/employee/Create'
+import CreateBody from '../../components/ownar/employee/Create'
 import EmployeeTypeContextProvider from '../../store/EmployeeTypeContext'
 import EmployeeContextProvider from '../../store/EmployeeContext'
 
