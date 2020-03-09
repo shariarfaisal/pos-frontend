@@ -2,10 +2,10 @@ import React,{ Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const ControllerItem = ({ name, link, subItems, active }) => {
+const Li = ({ name, link, subItems }) => {
 
   return(
-    active && <li className="nav-item">
+    <li className="nav-item">
       {subItems.length > 0 ?
         <Fragment>
           <div style={{cursor: 'pointer'}} data-toggle="collapse" data-target={`#${name}Collapse`} className="nav-link text-light d-flex"><span className="mr-auto">{name}</span> <i className="fa fa-sort-down"></i></div>
@@ -22,4 +22,21 @@ const ControllerItem = ({ name, link, subItems, active }) => {
 }
 
 
-export default ControllerItem
+const BranchController = ({ items }) => {
+return(
+    <div id="controller">
+      <div className="logo bg-info sticky-top">
+        <h1>POINTOF</h1>
+      </div>
+      <div className="items">
+        <ul className="nav flex-column">
+          {items.map((item,i) => <Li key={i} {...item} />)}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+
+
+export default BranchController

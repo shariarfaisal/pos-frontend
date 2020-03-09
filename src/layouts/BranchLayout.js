@@ -1,5 +1,5 @@
 import React from 'react'
-import Controller from '../components/core/Controller'
+import BranchController from '../components/core/BranchController'
 import Content from '../components/core/Content'
 
 const items = [
@@ -14,7 +14,7 @@ const items = [
 const BranchLayout = ({ children }) => {
 return(
   <div className="app-row d-flex">
-    <Controller items={items}/>
+    <BranchController items={items}/>
     <Content>
       {children}
     </Content>

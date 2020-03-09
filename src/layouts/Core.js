@@ -1,6 +1,20 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import Controller from '../components/core/Controller'
 import Content from '../components/core/Content'
+import { ProfileContext } from '../store/ProfileContext'
+
+const checkAccess = (access,items) => {
+  return items.map(i => {
+      const x = access[i.name.toLowerCase()]
+      if(x && x === '----'){
+        i.active = false
+      }else{
+        i.active = true
+      }
+      return i
+    })
+}
+
 
 const items = [
   {name: 'Home',link: '/',subItems:[]},
@@ -21,22 +35,25 @@ const items = [
     {name:'Employees',link: ''},
   ]},
   {name: 'Import',subItems:[
-    {name:'Create',link: ''},
-    {name:'Employees',link: ''},
+    {name:'Imports',link: '/import'},
   ]},
   {name: 'Vendor',subItems:[
     {name:'Vendors',link: '/vendor'}
   ]},
 ]
 
+// const access = context.info.type.access
+
 const Core = ({ children }) => {
-return(
-  <div className="app-row d-flex">
-    <Controller items={items}/>
-    <Content>
-      {children}
-    </Content>
-  </div>
+  const context = useContext(ProfileContext)
+
+  return(
+    <div className="app-row d-flex">
+      {context.info.type && <Controller items={checkAccess(context.info.type.access,items)}/>}
+      <Content>
+        {children}
+      </Content>
+    </div>
   )
 }
 export default Core
