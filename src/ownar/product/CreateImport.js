@@ -1,24 +1,24 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import ItemBody from '../../components/ownar/product/item/Item'
-import ProductSubItemContextProvider from '../../store/ProductSubItemContext'
+import ImportBody from '../../components/ownar/product/item/import/Import'
+import ProductItemContextProvider from '../../store/ProductItemContext'
 import ImportContextProvider from '../../store/ImportContext'
 
 
-const Item = (props) => {
+const CreateImport = (props) => {
   return(
-    <ProductSubItemContextProvider>
+    <ProductItemContextProvider>
       <ImportContextProvider>
         <Core>
           <div className="products">
             <div className="row justify-content-center">
-              <ItemBody />
+              <ImportBody />
             </div>
           </div>
         </Core>
       </ImportContextProvider>
-    </ProductSubItemContextProvider>
+    </ProductItemContextProvider>
   )
 }
 
-export default Item
+export default CreateImport

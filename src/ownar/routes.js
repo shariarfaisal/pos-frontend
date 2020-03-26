@@ -13,7 +13,7 @@ import Branches from './branch/Branches'
 import Profile from './profile/Profile'
 import Imports from './import/Imports'
 import Import from './import/Import'
-
+import CreateImport from './product/CreateImport'
 
 const access = {
     "employeeType": "rwud",
@@ -44,6 +44,7 @@ const routes = [
   {name: ['category','r'],path:'/category',component: Category},
   {name: ['product','r'],path:'/category/:catId',component: Products},
   {name: ['item','r'],path:'/category/:catId/:proId',component: Product},
+  {name: ['import','w'],path:'/category/:catId/:proId/:itemId/import/:importId',component: CreateImport},
   {name: ['subItem','r'],path:'/category/:catId/:proId/:itemId',component: Item},
   {name: ['vendor','r'],path:'/vendor',component: Vendors},
   {name: ['brand','r'],path:'/brand',component: Brands},

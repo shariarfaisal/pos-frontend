@@ -6,16 +6,34 @@ import { Link } from 'react-router-dom'
 
 const SubItem = ({ _id, item, quantity, exports: exp, expireDate, pp }) => {
   return(
-    <div className="col-md-6 col-lg-4 col-xl-3">
+    <div className="col-md-6 col-lg-4 col-xl-3 my-3">
       <div className="light-border" style={{background:'#ffffff'}}>
-        <p className="m-0 h6">{item.name}</p>
-        <small className="d-block">Imported: {quantity+exp}</small>
-        <small className="d-block">Quantity: {quantity}</small>
-        <small className="d-block">Purchase price: { pp }</small>
-        <small className="d-block">Exports: { exp }</small>
+        <p className="mb-2 border-bottom pb-1 h6">{item.name}</p>
+        <small className="d-block">Imported: <span className="badge badge-info">{quantity+exp}</span></small>
+        <small className="d-block">Quantity: <span className="badge badge-info">{quantity}</span></small>
+        <small className="d-block">Purchase price: <span className="badge badge-info">{ pp }</span></small>
+        <small className="d-block">Exports: <span className="badge badge-info">{ exp }</span></small>
         {expireDate && <small>Expire Date: {timeConverter(expireDate)}</small>}
       </div>
     </div>
+  )
+}
+
+
+const SingleImport = ({ item, quantity, exports: expts, pp, subItems }) => {
+  return(
+    <Fragment>
+      <h4 className="text-center mb-3">{item.name}</h4>
+      <div className="d-flex light-border" style={{background:'#fff'}}>
+        <span className="d-block mr-3">Total Imported: <span className="badge badge-info">{quantity + expts}</span></span>
+        <span className="d-block mr-3">Quantity: <span className="badge badge-info">{quantity}</span></span>
+        <span className="d-block mr-3">Exports: <span className="badge badge-info">{expts}</span></span>
+        <span className="d-block mr-3">Purchase Price: <span className="badge badge-info">{pp}</span></span>
+      </div>
+      <div className="m-3  row mb-4">
+        {subItems.map(i => <SubItem key={i._id} {...i} /> )}
+      </div>
+    </Fragment>
   )
 }
 
@@ -27,28 +45,14 @@ const Import = (props) => {
   useEffect(() => {
     context.import(importId,setData)
   },[])
-console.log(data);
+
   return(
     Object.keys(data).length > 0 && <div className="col-11 p-3 light-border">
-      <h2>{data.item.name}</h2>
-      {(data.quantity + data.exports) > 0 && <div className="d-flex">
-        {(data.quantity + data.exports) > 0 && <Fragment>
-          <p className="mr-3">Total Imported: <strong>{data.quantity + data.exports}</strong></p>
-          <p className="mr-3">Quantity: <strong>{data.quantity}</strong></p>
-          <p className="mr-3">Exports: <strong>{data.exports}</strong></p>
-          <p className="mr-3">Purchase Price: <strong>{data.pp}</strong></p>
-        </Fragment>}
-        <p className="mr-3">Total Price: <strong>{data.total}</strong></p>
-      </div>}
-      <h5 className="text-center my-4">Items</h5>
-      <div className="m-3  row mb-4 justify-content-center">
-        {data.subItems.map(i => <SubItem key={i._id} {...i} /> )}
-      </div>
-      <p>Imported from <Link to={`/ventor/${data.vendor._id}`}>{data.vendor.name}</Link></p>
-      <p>Imported by <Link to={`/ventor/${data.employee._id}`}>{data.employee.name}</Link></p>
-      {data.expireDate && <p>Expire Date: <strong>{data.expireDate}</strong></p>}
-      <p>Imported at <strong>{timeConverter(data.importedDate)}</strong></p>
-      <p>Added at <strong>{timeConverter(data.createdAt)}</strong></p>
+      <small className="d-block">Imported by <Link to={`/employee/${data.employee._id}`}><span className="badge">{data.employee.name}</span></Link> from <Link to={`/vendor/${data.vendor._id}`}><span className="badge">{data.vendor.name}</span></Link></small>
+      {data.expireDate && <small>Expire Date: <strong>{data.expireDate}</strong></small>}
+      <small className="d-block">Imported at <span className="badge badge-warning ">{data.importDate}</span></small>
+      <small className="d-block">Added at <span className="badge badge-warning">{timeConverter(data.createdAt)}</span></small>
+      {data.items.map((item,index) => <SingleImport key={index} {...item}/>)}
     </div>
   )
 }

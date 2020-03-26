@@ -5,8 +5,9 @@ import { ProductItemContext } from '../../../../store/ProductItemContext'
 import CreateBox from '../../../CreateBox'
 import Create from './Create'
 
-const Items = ({ id }) => {
+const Items = (props) => {
   const [show,setShow] = useState(false)
+  const [importShow,setImportShow] = useState(false)
   const itemContext = useContext(ProductItemContext)
 
 

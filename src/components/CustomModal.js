@@ -3,12 +3,12 @@ import ModalFooter from './ModalFooter'
 import { Modal } from 'react-bootstrap'
 
 
-const CustomModal = ({ children, submitHandler, title, show, setShow }) => {
+const CustomModal = ({ children, submitHandler, title, show, setShow, size }) => {
   return(
     <Modal
         show={show}
         onHide={e => setShow(false)}
-        size="md"
+        size={ size ? size : "md"}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

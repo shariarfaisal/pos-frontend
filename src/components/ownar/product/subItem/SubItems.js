@@ -4,14 +4,16 @@ import { ProductSubItemContext } from '../../../../store/ProductSubItemContext'
 import Item from './Item'
 import Create from './Create'
 import CreateBox from '../../../CreateBox'
+import ImportBar from './ImportBar'
+
 
 const SubItems = (props) => {
   const [show,setShow] = useState(false)
-  const { itemId } = useParams()
   const context = useContext(ProductSubItemContext)
 
   return(
-    <div className="product-subItems">
+    <div className="product-subItems" style={{position: 'relative'}}>
+      <ImportBar />
       <CreateBox setShow={setShow} title="Create New Item">
         <Create show={show} setShow={setShow} />
       </CreateBox>

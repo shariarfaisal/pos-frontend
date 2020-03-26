@@ -19,7 +19,6 @@ const ImportContextProviver = ({ children }) => {
       imports,
       setImports,
       setReload,
-      getPost: custom.getPost,
       import: custom.getItem
     }}>
       { children }

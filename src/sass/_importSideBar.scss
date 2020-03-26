@@ -1,0 +1,12 @@
+
+#importSideBar{
+  position: absolute;
+  top: 10%;
+  right: -20px;
+  height: auto;
+  z-index: 2;
+
+  .box-wrapper{
+    width: 300px;
+  }
+}
