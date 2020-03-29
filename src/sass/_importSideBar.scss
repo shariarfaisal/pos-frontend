@@ -8,5 +8,9 @@
 
   .box-wrapper{
     width: 300px;
+    .overflow{
+      max-height: 400px;
+      overflow-y: scroll;
+    }
   }
 }

@@ -3,6 +3,11 @@ import InputSection from './InputSection'
 import { VendorContext } from '../../../store/VendorContext'
 import axios from 'axios'
 
+const insTime = (date) => {
+  let uTime = new Date(date).getTime()
+  const xTime = new Date().getTime() - uTime
+  return uTime + xTime
+}
 
 const getTime = (time) => {
   const t = time
@@ -22,7 +27,7 @@ const CreateImport = (props) => {
     e.preventDefault()
     if(vendor && importDate && title){
       try{
-        const post = await axios.post('http://localhost:1000/api/import/',{ vendor, importDate, title, note })
+        const post = await axios.post('http://localhost:1000/api/import/',{ vendor, importDate: insTime(importDate), title, note })
         if(post){
           setSuccess("New Import Created!")
           setError('')

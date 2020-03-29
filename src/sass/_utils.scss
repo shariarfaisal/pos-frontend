@@ -43,3 +43,28 @@
 .pointer{
   cursor: pointer;
 }
+
+.bg-light-blue{
+  background: #f8f9fa !important;
+}
+
+.bg-white{
+  background: #ffffff;
+}
+
+.end-line{
+  width: 100%;
+  margin: 10px 0;
+  .item-1,.item-3{
+    width: 44%;
+    border-bottom: 1px dashed #c4c4c4;
+  }
+  .item-2{
+    width: 23px;
+    height: 20px;
+    margin: 5px;
+    background: #e8e8e89c;
+    border: 1px solid #c4c4c4;
+    border-radius: 100%;
+  }
+}

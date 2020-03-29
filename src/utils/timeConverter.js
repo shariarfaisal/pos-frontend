@@ -1,7 +1,8 @@
 
-const timeConverter = (arg) => {
+const timeConverter = (arg,num=false) => {
   const now = new Date()
-  const custom = new Date(arg)
+  var x = Number(arg)
+  const custom = new Date(x ? x : arg)
 
   const sec = Math.floor((now - custom) / 1000)
   const min = Math.floor(sec / 60 )

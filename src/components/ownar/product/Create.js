@@ -17,6 +17,7 @@ const Create = ({ category, show, setShow }) => {
     if(name && category){
       const product = await context.getPost({ name, category })
       if(product.success){
+        setError('')
         setSuccess(product.success)
         context.setProducts([...context.products,product.data.data])
         setName('');
