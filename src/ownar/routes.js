@@ -9,6 +9,7 @@ import Product from './product/Product'
 import Item from './product/Item'
 import Vendors from './vendor/Vendors'
 import Brands from './brand/Brands'
+import Brand from './brand/Brand'
 import Branches from './branch/Branches'
 import Profile from './profile/Profile'
 import Imports from './import/Imports'
@@ -48,6 +49,7 @@ const routes = [
   {name: ['subItem','r'],path:'/category/:catId/:proId/:itemId',component: Item},
   {name: ['vendor','r'],path:'/vendor',component: Vendors},
   {name: ['brand','r'],path:'/brand',component: Brands},
+  {name: ['brand','r'],path:'/brand/:brandId',component: Brand},
   {name: ['branch','r'],path:'/branch',component: Branches},
   {name: ['profile','r'],path:'/profile',component: Profile},
   {name: ['import','r'],path:'/import',component: Imports},

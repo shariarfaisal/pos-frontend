@@ -1,14 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import timeConverter from '../../../utils/timeConverter'
-
-const strConvert = (str,length) => {
-  if((str.length + 3) > length){
-    return str.substr(0,length)+'...'
-  }else{
-    return str
-  }
-}
+import strConvert from '../../../utils/strConvert'
 
 const ImportItem = ({ _id, items, importDate, employee, vendor, title, createdAt }) => {
   const history = useHistory()

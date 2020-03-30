@@ -19,7 +19,8 @@ const BrandContextProvider = ({ children }) => {
       brands,
       setBrands,
       setReload,
-      getPost: custom.getPost 
+      getPost: custom.getPost,
+      brand: custom.getItem
     }}>
       { children }
     </BrandContext.Provider>
