@@ -7,6 +7,7 @@ const items = [
   {name: 'Product',link: '/',subItems:[
     {name: 'Products',link: '/product'}
   ]},
+  {name: 'Export Request',link: '/exportRequest',subItems:[]},
   {name: 'Sales',link: '/',subItems:[]},
 ]
 
