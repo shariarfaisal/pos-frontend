@@ -7,8 +7,8 @@ import statusControl from './statusControl'
 
 const RequestItem = ({ _id, title, note, createdAt, status }) => {
   return (
-    <div className="col-md-6 col-lg-4 my-2">
-      <div className="light-border">
+    <div className="col-lg-6 my-2 request-item">
+      <div className="gray-border">
         <div className="d-flex justify-content-between">
           <p className="mb-0">
             <Link className="text-dark" to={`/exportRequest/${_id}`}>{title}</Link>

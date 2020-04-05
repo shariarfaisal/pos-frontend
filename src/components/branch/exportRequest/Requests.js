@@ -17,8 +17,8 @@ const Requests = (props) => {
   },[])
 
   return(
-    <div className="requests my-5">
-      <div className="row py-5">
+    <div className="requests">
+      <div className="row py-4">
         {requests.map((req,i) => <RequestItem key={i} {...req} /> )}
       </div>
     </div>

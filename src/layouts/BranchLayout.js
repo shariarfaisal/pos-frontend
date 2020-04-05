@@ -4,6 +4,8 @@ import Content from '../components/core/Content'
 
 const items = [
   {name: 'Home',link: '/',subItems:[]},
+  {name: 'Store',link: '/store',subItems:[]},
+  {name: 'Wishlist',link: '/wishlist',subItems:[]},
   {name: 'Product',link: '/',subItems:[
     {name: 'Products',link: '/product'}
   ]},

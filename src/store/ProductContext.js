@@ -1,5 +1,5 @@
 import React,{ createContext, useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Custom from './Custom'
 const custom = new Custom('product')
@@ -14,13 +14,14 @@ const getProductItems = async (id,set) => {
 
 export const ProductContext = createContext({})
 
-const ProductContextProvider = ({ children, match }) => {
+const ProductContextProvider = ({ children }) => {
+  const { catId } = useParams()
   const [products,setProducts] = useState([])
   const [product,setProduct] = useState({})
   const [reload,setReload] = useState(false)
 
   useEffect(() => {
-    custom.getItems(setProducts,`/category/${match.params.catId}`)
+    custom.getItems(setProducts,`/category/${catId}`)
     setReload(true)
   },[reload])
 
@@ -39,4 +40,4 @@ const ProductContextProvider = ({ children, match }) => {
 }
 
 
-export default withRouter(ProductContextProvider)
+export default ProductContextProvider

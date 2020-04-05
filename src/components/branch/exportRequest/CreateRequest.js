@@ -6,6 +6,7 @@ const CreateRequest = (props) => {
   const [message,setMessage] = useState('')
   const [error,setError] = useState('')
   const [success,setSuccess] = useState('')
+  const [show,setShow] = useState(false)
 
   const submitHandler = async e => {
     e.preventDefault()
@@ -25,11 +26,11 @@ const CreateRequest = (props) => {
   }
 
   return(
-    <div className="">
-      <button data-toggle="collapse" data-target="#createRequest" type="button" className="btn btn-sm btn-light text-dark">
-        <i className="fa fa-plus text-success"></i> Create New Request
+    <div className="create-request">
+      <button onClick={e => setShow(true)} type="button" className="btn btn-light text-dark rounded-circle">
+        <i className="fa fa-plus text-success"></i>
       </button>
-      <div className="collapse py-4 light-border border-0 my-4" id="createRequest">
+      {show && <div className="py-4 gray-border mt-3" id="createRequest">
         <p className="text-info text-center">Create New Request!</p>
         {success && <small className="text-center d-block text-success">{success}</small>}
         <form onSubmit={submitHandler} className="row">
@@ -56,10 +57,11 @@ const CreateRequest = (props) => {
             {error && error.message && <small className="text-info">{error.message}</small>}
           </div>
           <div className="col-12">
-            <button type="submit" className="btn btn-sm btn-success">Create</button>
+            <button disabled={title ? false : true} type="submit" className="btn btn-sm btn-success">Create</button>
+            <button onClick={e => setShow(false)} type="button" className="btn btn-sm btn-gray mx-2">Cancel</button>
           </div>
         </form>
-      </div>
+      </div>}
     </div>
   )
 }

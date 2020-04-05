@@ -33,7 +33,7 @@ const ExportRequest = (props) => {
   },[])
 
   return(
-    <div className="col-lg-11">
+    <div className="col-lg-11 export-request">
       {request && <RequestInfo {...request} />}
       {request && <ExportRequestItems  {...request} />}
     </div>
