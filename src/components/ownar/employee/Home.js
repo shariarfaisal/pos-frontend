@@ -9,14 +9,11 @@ const Home = (props) => {
 
   return(
     <div className="col-lg-10 employee-home">
+      <EmployeeSearch />
       <div className="list-group">
-        <EmployeeSearch />
-
         {context && context.emploies.map((employee,i) => {
           return <ProfileItem key={i} {...employee} />
         })}
-
-
       </div>
     </div>
   )

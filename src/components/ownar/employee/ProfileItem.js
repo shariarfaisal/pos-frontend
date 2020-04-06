@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProfileItem = ({ _id, name, email, phone, username}) => {
   return (
-    <div className="list-group-item d-flex align-items-center my-2 rounded-0 light-border">
+    <div className="profile-item list-group-item d-flex align-items-center my-2 gray-border">
       <div className="left">
         <img src="img/faisal.jpeg" alt="" className="rounded" width="100px"/>
       </div>

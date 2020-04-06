@@ -3,8 +3,6 @@ import TypeUpdateModal from './TypeUpdateModal'
 import TypeDeleteModal from './TypeDeleteModal'
 
 
-
-
 const TableRow = ({ i, _id, name }) => {
   const [show,setShow] = useState(false)
   const [showD,setShowD] = useState(false)

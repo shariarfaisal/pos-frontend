@@ -21,7 +21,8 @@ const CategoryContextProvider = ({ children }) => {
         setCategories,
         setReload,
         getPost: custom.getPost,
-        category: custom.getItem
+        category: custom.getItem,
+        getDelete: custom.getDelete
     }}>
       {children}
     </CategoryContext.Provider>
