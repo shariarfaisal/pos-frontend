@@ -1,15 +1,17 @@
-import React,{ useState } from 'react'
+import React,{ useContext } from 'react'
 import CreateItem from './CreateItem'
 import ItemBlock from './ItemBlock'
+import { ExportRequestContext } from './ExportRequestContext'
 
 
 
-const ExportRequestItems = ({ items, status }) => {
+const ExportRequestItems = (props) => {
+  const { request } = useContext(ExportRequestContext)
   return(
-    <div className="export-request-items">
-      <CreateItem status={status} itemLength={items.length}/>
+    request && <div className="export-request-items">
+      <CreateItem />
       <div className="row">
-        {items.map((item,i) => <ItemBlock key={i} {...item} status={status} /> )}
+        {request.items.map((item,i) => <ItemBlock key={i} {...item} status={request.status} /> )}
       </div>
     </div>
   )

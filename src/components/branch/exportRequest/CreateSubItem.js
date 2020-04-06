@@ -1,26 +1,22 @@
-import React,{ useState, memo } from 'react'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import React,{ useState, memo, useContext } from 'react'
+import { ExportRequestContext } from './ExportRequestContext'
 
 
-const CreateSubItem = ({ setCreateMode, itemId, setItems, items }) => {
-  const { requestId } = useParams()
+
+const CreateSubItem = ({ setCreateMode, itemId }) => {
+  const { requestId, setSubItem, updateSubItem } = useContext(ExportRequestContext)
+
   const [code,setCode] = useState('')
   const [quantity,setQuantity] = useState(1)
   const [error,setError] = useState('')
 
   const submitHandler = async e => {
     e.preventDefault()
-    try{
-      const post = await axios.post(`http://localhost:1000/api/exportRequest/${requestId}/${itemId}/subItem`,{ code, quantity })
-        if(post){
-          setError('')
-          setCode('')
-          setQuantity('')
-          setItems([...items,post.data])
-        }
-    }catch(err){
-      setError(err.response.data)
+    const res = await setSubItem({ requestId, itemId, data:{ code, quantity }, updateSubItem })
+    if(res.error) setError(res.error)
+    if(res.success){
+      setError('')
+      setCode('');setQuantity(1);
     }
   }
 

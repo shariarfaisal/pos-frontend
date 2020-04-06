@@ -1,12 +1,15 @@
-import React,{ useState } from 'react'
+import React,{ useState, useContext } from 'react'
 import { Modal } from 'react-bootstrap'
 import axios from 'axios'
+import { ExportRequestContext } from './ExportRequestContext'
 
-const CreateItemModal = ({ show, setShow, requestId }) => {
+
+const CreateItemModal = ({ show, setShow }) => {
   const [code,setCode] = useState('')
   const [quantity,setQuantity] = useState(0)
   const [error,setError] = useState('')
   const [success,setSuccess] = useState('')
+  const { requestId, setItem } = useContext(ExportRequestContext)
 
 
 
@@ -19,11 +22,17 @@ const CreateItemModal = ({ show, setShow, requestId }) => {
         setSuccess("Item added!")
         setCode('')
         setQuantity(0)
+        setItem(add.data)
       }
     }catch(err){
       setSuccess('')
       setError(err.response.data)
     }
+  }
+
+  const msgCleaner = (e) => {
+    setSuccess('')
+    setError('')
   }
 
 
@@ -42,6 +51,9 @@ const CreateItemModal = ({ show, setShow, requestId }) => {
             {success && <div className="col-12 mb-3">
               <p className="text-center text-success mb-0">{success}</p>
             </div>}
+            {error && <div className="col-12 mb-3">
+              {Object.keys(error).map((err,i) => <p key={i} className="mb-0 text-center text-danger">{error[err]}</p>)}
+            </div>}
             <div className="col-md-6 my-2">
               <div className="form-group">
                 <label htmlFor="item_code">Item Code</label>
@@ -50,6 +62,7 @@ const CreateItemModal = ({ show, setShow, requestId }) => {
                   id="item_code"
                   required
                   value={code}
+                  onKeyPress={msgCleaner}
                   className="form-control"
                   onChange={e => setCode(e.target.value)}
                   placeholder="Code"
