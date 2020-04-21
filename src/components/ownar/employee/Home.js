@@ -1,26 +1,18 @@
-import React,{ useState, useEffect, useContext } from 'react'
-import { EmployeeContext } from '../../../store/EmployeeContext'
-import ProfileItem from './ProfileItem'
+import React from 'react'
 import EmployeeSearch from './EmployeeSearch'
+import Emploies from './Emploies'
+import EmployeeLocalContextProvider from './EmployeeLocalContext'
 
 
 const Home = (props) => {
-  const context = useContext(EmployeeContext)
-
   return(
-    <div className="col-lg-10 employee-home">
-      <EmployeeSearch />
-      <div className="list-group">
-        {context && context.emploies.map((employee,i) => {
-          return <ProfileItem key={i} {...employee} />
-        })}
+    <EmployeeLocalContextProvider>
+      <div className="col-lg-10 employee-home">
+        <EmployeeSearch />
+        <Emploies />
       </div>
-    </div>
+    </EmployeeLocalContextProvider>
   )
 }
-
-
-
-
 
 export default Home
