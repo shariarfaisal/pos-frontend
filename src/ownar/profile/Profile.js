@@ -1,13 +1,13 @@
 import React from 'react'
 import Core from '../../layouts/Core'
-import Address from '../../components/ownar/profile/Address'
+import Body from '../../components/ownar/profile/Profile'
 
 
 const Profile = (props) => {
   return(
     <Core>
       <div className="employee-create">
-        <Address />
+        <Body />
       </div>
     </Core>
   )
