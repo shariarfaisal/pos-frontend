@@ -1,39 +1,37 @@
-import React,{ useState, useEffect } from 'react'
-import axios from 'axios'
+import React,{ useState, useEffect, useContext } from 'react'
 import ProductBlock from './ProductBlock'
+import { BrandLocalContext } from './BrandLocalContext'
+import { useParams } from 'react-router-dom'
 
-const getItem = async (brandId,setItems) => {
-  const items = await axios.get(`http://localhost:1000/api/item/${brandId}/brand`)
+
+const itemsToProduct = (items) => {
   if(items){
-    setItems(items.data)
+    return items.reduce((a,b) => {
+      if(a[b.product._id]){
+        a[b.product._id].items.push(b)
+      }else{
+        a[b.product._id] = {
+          info: b.product,
+          items: [b]
+        }
+      }
+      return a
+    },{})
   }
 }
 
-const itemsToProduct = (items) => {
-  return items.reduce((a,b) => {
-    if(a[b.product._id]){
-      a[b.product._id].items.push(b)
-    }else{
-      a[b.product._id] = {
-        info: b.product,
-        items: [b]
-      }
-    }
-    return a
-  },{})
-}
-
-const BrandItems = ({ brandId }) => {
-  const [items,setItems] = useState([])
+const BrandItems = (props) => {
+  const { brandId } = useParams()
+  const { items, getItemsByBrand } = useContext(BrandLocalContext)
   const products = itemsToProduct(items)
 
   useEffect(() => {
-    getItem(brandId,setItems)
+    getItemsByBrand(brandId)
   },[])
 
   return(
     <div className="row">
-      {Object.keys(products).map((product,i) => <ProductBlock key={i} {...products[product]} /> )}
+      {products && Object.keys(products).map((product,i) => <ProductBlock key={i} {...products[product]} /> )}
     </div>
   )
 }

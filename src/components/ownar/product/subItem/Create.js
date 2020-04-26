@@ -1,6 +1,5 @@
 import React,{ useState, useContext } from 'react'
-import { ProductSubItemContext } from '../../../../store/ProductSubItemContext'
-import MsgBox from '../../../MsgBox'
+import { SubItemLocalContext } from './SubItemLocalContext'
 import { useParams } from 'react-router-dom'
 import CustomModal from '../../../CustomModal'
 
@@ -14,23 +13,19 @@ const Create = ({ show, setShow }) => {
 
   const [success,setSuccess] = useState('')
   const [error,setError] = useState('')
-  const context = useContext(ProductSubItemContext)
+  const { createSubItem } = useContext(SubItemLocalContext)
 
   const submitHandler = async e => {
     e.preventDefault()
-    if(name && code && description && itemId && image){
-      const items = await context.getPost({ name,  code, description, image, item: itemId })
-      if(items.success){
-        setError('')
-        setSuccess(items.success)
-        context.setSubItems([...context.subItems,items.data.data])
-        setName('')
-        setCode('')
-        setDescription('')
-      }else{
-        setSuccess('')
-        setError(items.error)
-      }
+    const get = await createSubItem({ name,  code, description, image, item: itemId })
+    if(get.data){
+      setSuccess("New item added!")
+      setError('')
+      setName('');setCode('');setDescription('');
+    }
+    if(get.error){
+      setError(get.error.data)
+      setSuccess('')
     }
   }
 
@@ -41,7 +36,7 @@ const Create = ({ show, setShow }) => {
       setShow={setShow}
       submitHandler={submitHandler}
     >
-      <MsgBox error={error} success={success} />
+        {success && <div><p class="text-center text-success pb-3">{success}</p></div>}
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -53,6 +48,7 @@ const Create = ({ show, setShow }) => {
             onChange={e => setName(e.target.value)}
             required={true}
           />
+          {error.name && <small className="text-danger">{error.name}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="code">Code</label>
@@ -65,6 +61,7 @@ const Create = ({ show, setShow }) => {
             onChange={e => setCode(e.target.value)}
             required={true}
           />
+          {error.code && <small className="text-danger">{error.code}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="description">Description</label>
@@ -77,6 +74,7 @@ const Create = ({ show, setShow }) => {
             onChange={e => setDescription(e.target.value)}
             placeholder="Description">
           </textarea>
+          {error.description && <small className="text-danger">{error.description}</small>}
         </div>
     </CustomModal>
   )

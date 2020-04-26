@@ -1,12 +1,10 @@
 import React,{ useState, useContext } from 'react'
-import { ProductItemContext } from '../../../../store/ProductItemContext'
-import { BrandContext } from '../../../../store/BrandContext'
-import MsgBox from '../../../MsgBox'
 import { withRouter } from 'react-router-dom'
 import CustomModal from '../../../CustomModal'
+import { ItemLocalContext } from './ItemLocalContext'
 
 
-const Create = ({ show, setShow, match }) => {
+const Create = ({ show, setShow, match, brands }) => {
   const [name,setName] = useState('')
   const [code,setCode] = useState('')
   const [brand,setBrand] = useState('')
@@ -15,25 +13,18 @@ const Create = ({ show, setShow, match }) => {
   const product = match.params.proId
   const [success,setSuccess] = useState('')
   const [error,setError] = useState('')
-  const context = useContext(ProductItemContext)
-  const brandContext = useContext(BrandContext)
+  const { createItem } = useContext(ItemLocalContext)
+
 
   const submitHandler = async e => {
     e.preventDefault()
-    if(name && code && description && brand && image && product){
-      const items = await context.getPost({ name,  code, description, image, product, brand })
-      if(items.success){
-        setError('')
-        setSuccess(items.success)
-        context.setItems([...context.items,items.data.data])
-        setName('')
-        setCode('')
-        setDescription('')
-      }else{
-        setSuccess('')
-        setError(items.error)
-      }
+    const get = await createItem({ name,  code, description, image, product, brand })
+    if(get.data){
+      setSuccess("New item created!")
+      setName('');setCode('');setDescription('');
+      setError('')
     }
+    if(get.error) setError(get.error.data)
   }
 
   return(
@@ -43,7 +34,7 @@ const Create = ({ show, setShow, match }) => {
       setShow={setShow}
       submitHandler={submitHandler}
     >
-      <MsgBox error={error} success={success} />
+        {success && <div><p className="text-center text-success">{success}</p></div>}
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -55,6 +46,7 @@ const Create = ({ show, setShow, match }) => {
             onChange={e => setName(e.target.value)}
             required={true}
           />
+          {error.name && <small className="text-danger">{error.name}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="code">Code</label>
@@ -67,15 +59,17 @@ const Create = ({ show, setShow, match }) => {
             onChange={e => setCode(e.target.value)}
             required={true}
           />
+        {error.code && <small className="text-danger">{error.code}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="brand">Brand</label>
           <select className="form-control form-control-sm" value={brand} onChange={e => setBrand(e.target.value)}>
             <option>Select Brand</option>
-            {brandContext.brands.map((b,i) => {
-              return <option key={i} value={b._id}>{b.name}</option>
+            {Object.keys(brands).map((id,i) => {
+              return <option key={i} value={id}>{brands[id].name}</option>
             })}
           </select>
+          {error.brand && <small className="text-danger">{error.brand}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="description">Description</label>
@@ -88,6 +82,7 @@ const Create = ({ show, setShow, match }) => {
             onChange={e => setDescription(e.target.value)}
             placeholder="Description">
           </textarea>
+          {error.description && <small className="text-danger">{error.description}</small>}
         </div>
     </CustomModal>
   )

@@ -1,23 +1,20 @@
 import React from 'react'
 import Core from '../../layouts/Core'
 import ProductsBody from '../../components/ownar/product/Products'
-import ProductContextProvider from '../../store/ProductContext'
-import CategoryContextProvider from '../../store/CategoryContext'
+import ProductLocalContextProvider from '../../components/ownar/product/ProductLocalContext'
 
 
 const Products = (props) => {
 return(
-  <ProductContextProvider>
-    <CategoryContextProvider>
-      <Core>
-        <div className="products">
-          <div className="row justify-content-center">
-            <ProductsBody />
-          </div>
+  <ProductLocalContextProvider>
+    <Core>
+      <div className="products">
+        <div className="row justify-content-center">
+          <ProductsBody />
         </div>
-      </Core>
-    </CategoryContextProvider>
-  </ProductContextProvider>
+      </div>
+    </Core>
+  </ProductLocalContextProvider>
   )
 }
 export default Products

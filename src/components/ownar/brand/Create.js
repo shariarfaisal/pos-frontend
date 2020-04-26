@@ -1,8 +1,7 @@
 import React,{ useState, useContext } from 'react'
-import { BrandContext } from '../../../store/BrandContext'
+import { BrandLocalContext } from './BrandLocalContext'
 import { Modal } from 'react-bootstrap'
 import ModalFooter from '../../ModalFooter'
-import MsgBox from '../../MsgBox'
 
 
 const Create = ({ show, setShow }) => {
@@ -10,20 +9,19 @@ const Create = ({ show, setShow }) => {
   const [code,setCode] = useState('')
   const [success,setSuccess] = useState('')
   const [error,setError] = useState('')
-  const context = useContext(BrandContext)
+  const { createBrand } = useContext(BrandLocalContext)
 
   const submitHandler = async e => {
     e.preventDefault()
-    if(name && code){
-      const brand = await context.getPost({ name, code })
-      if(brand.success){
-        setSuccess(brand.success)
-        context.setBrands([...context.brands,brand.data.data])
-        setName('');
-        setCode('')
-      }else{
-        setError(brand.error)
-      }
+    const get = await createBrand({ name, code })
+    if(get.data){
+      setError('')
+      setSuccess("New item added!");
+      setName('');setCode('')
+    }
+    if(get.error){
+      setSuccess('')
+      setError(get.error.data)
     }
   }
 
@@ -38,7 +36,7 @@ const Create = ({ show, setShow }) => {
       <Modal.Body>
         <form onSubmit={submitHandler}>
           <h2 className="my-4 text-center h4">Create New Brand</h2>
-          <MsgBox error={error} success={success} />
+          {success && <div><p className="text-center text-success">{success}</p></div>}
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -49,6 +47,7 @@ const Create = ({ show, setShow }) => {
               value={name}
               onChange={e => setName(e.target.value)}
             />
+            {error.name && <small className="text-danger">{error.name}</small>}
           </div>
           <div className="form-group">
             <label htmlFor="code">Code</label>
@@ -60,6 +59,7 @@ const Create = ({ show, setShow }) => {
               value={code}
               onChange={e => setCode(e.target.value)}
             />
+            {error.code && <small className="text-danger">{error.code}</small>}
           </div>
           <ModalFooter show={show} setShow={setShow} />
         </form>

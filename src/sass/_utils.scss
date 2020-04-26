@@ -12,6 +12,10 @@
   font-weight: 600;
 }
 
+.light-shadow{
+  box-shadow: 0 0 4px 2px #f3f3f3;
+}
+
 .btn-light-blue{
   background: #F0F0F0;
   &:hover{
@@ -30,6 +34,8 @@
   }
 }
 
+.bg-gray-h:hover{background: #ebecec !important;color: #000000 !important;}
+
 .text-green-h{
   &:hover{
     color: green !important;
@@ -38,6 +44,11 @@
 .text-red-h{
   &:hover{
     color: #dc3545 !important;
+  }
+}
+.text-gray-h{
+  &:hover{
+    color: gray !important;
   }
 }
 
@@ -124,6 +135,74 @@
     }
     &-track{
       background: #f1f1f1;
+    }
+  }
+}
+
+.h-1{height: 100px;}
+.min-h-1{min-height: 100px;}
+.max-h-1{max-height: 100px;}
+
+.h-2{height: 200px;}
+.min-h-2{min-height: 200px;}
+.max-h-2{max-height: 200px;}
+
+.h-3{height: 300px;}
+.min-h-3{min-height: 300px;}
+.max-h-3{max-height: 300px;}
+
+.h-4{height: 400px;}
+.min-h-4{min-height: 400px;}
+.max-h-4{max-height: 400px;}
+
+.h-5{height: 500px;}
+.min-h-5{min-height: 500px;}
+.max-h-5{max-height: 500px;}
+
+
+.clone-corner{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  .clone{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: 700;
+    color: #9c9c9c;
+    cursor: pointer;
+    &:hover{
+      color: #000000;
+    }
+  }
+
+  .body{
+    position: absolute;
+    min-width: 150px;
+    max-width: 250px;
+    top: 5px;
+    right: 20px;
+    padding: 5px 0px;
+    border-radius: 5px;
+    font-size: 13px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0px 0px 4px 1px #eeeeee;
+    z-index: 1000;
+    background: #fff;
+
+    .item{
+      color: #383838;
+      font-weight: 500;
+      padding: 3px 20px;
+      text-align: center;
+      cursor: pointer;
+      border-top: 1px solid #ffffff;
+      border-bottom: 1px solid #ffffff;
+      &:hover{
+        border-top: 1px solid #e4e4e4;
+        border-bottom: 1px solid #e4e4e4;
+        background: #f5f5f5ed;
+      }
     }
   }
 }

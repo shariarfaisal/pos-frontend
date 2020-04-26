@@ -1,6 +1,7 @@
 import React,{ useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { CategoryContext } from '../../../store/CategoryContext'
+import CloneCorner from '../../CloneCorner'
 
 const Item = ({ _id, name, history }) => {
   const { getDelete, setCategories, categories } = useContext(CategoryContext)
@@ -19,12 +20,13 @@ const Item = ({ _id, name, history }) => {
 
   return (
     <div onDoubleClick={e => history.push(`/category/${_id}`)} className="col-sm-6 col-md-4 col-lg-3 my-2">
-      <div className="p-3 light-border">
+      <div className="p-3 gray-border shadow min-h-1">
         <div className="d-flex justify-content-between">
           <h6 className="m-0"><Link className="text-dark" to={`/category/${_id}`}>{name}</Link></h6>
-          <div>
-            <i onClick={onDeleteHandle} className="fa fa-trash text-muted text-red-h pointer"></i>
-          </div>
+          <CloneCorner>
+            <div className="item">Update</div>
+            <div onClick={onDeleteHandle} className="item">Delete</div>
+          </CloneCorner>
         </div>
       </div>
     </div>

@@ -1,50 +1,56 @@
 import React,{ useState, useContext } from 'react'
-import { ProductContext } from '../../../store/ProductContext'
-import { CategoryContext } from '../../../store/CategoryContext'
+import { ProductLocalContext } from './ProductLocalContext'
 import CustomModal from '../../CustomModal'
-import MsgBox from '../../MsgBox'
 
 const Create = ({ category, show, setShow }) => {
   const [name,setName] = useState('')
-  // const [category,setCategory] = useState('')
-  const [success,setSuccess] = useState('')
+  const [code,setCode] = useState('')
   const [error,setError] = useState('')
-  const categoryContext = useContext(CategoryContext)
-  const context = useContext(ProductContext)
+  const { createProduct } = useContext(ProductLocalContext)
 
   const submitHandler = async e => {
     e.preventDefault()
-    if(name && category){
-      const product = await context.getPost({ name, category })
-      if(product.success){
-        setError('')
-        setSuccess(product.success)
-        context.setProducts([...context.products,product.data.data])
-        setName('');
-      }else{
-        setError(product.error)
-      }
-    }
+    const { error, data } = await createProduct({ name, code, category })
+    if(data) setShow(false)
+    if(error) setError(error.data)
   }
 
   return(
     <CustomModal
         show={show}
         setShow={setShow}
-        title="Create New Item"
+        title="Create New Product"
         submitHandler={submitHandler}
+        size="lg"
       >
-      <MsgBox error={error} success={success} />
-        <div className="form-group">
-          <label htmlFor="name">Product Name</label>
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            placeholder="Product Name"
-            id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
+        <div className="row">
+          <div className="col-12">
+            {error.msg && <small className="my-3 text-danger text-center d-block">{error.msg}</small>}
+          </div>
+          <div className="form-group col-lg-6">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              placeholder="Name"
+              id="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            {error.name && <small className="text-danger">{error.name}</small>}
+          </div>
+          <div className="form-group col-lg-6">
+            <label htmlFor="code">Code</label>
+            <input
+              type="text"
+              className="form-control form-control-sm"
+              placeholder="Code"
+              id="code"
+              value={code}
+              onChange={e => setCode(e.target.value)}
+            />
+          {error.code && <small className="text-danger">{error.code}</small>}
+          </div>
         </div>
     </CustomModal>
   )

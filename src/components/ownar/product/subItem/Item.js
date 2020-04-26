@@ -1,16 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import SubItems from '../subItem/SubItems'
+import ItemInfo from './ItemInfo'
 
 
-const Item = ({ name, _id  }) => {
+const Item = (props) => {
   return(
-    <div className="col-sm-6 col-md-4 col-lg-3 my-2">
-      <div className="p-3 light-border">
-        <h6 className="m-0"><Link className="text-dark" to={`/item/${_id}`}>{name}</Link></h6>
-      </div>
+    <div className="col-12">
+      <ItemInfo />
+      <SubItems />
     </div>
   )
 }
-
-
 export default Item

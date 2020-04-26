@@ -7,6 +7,7 @@ import Category from './category/Category'
 import Products from './product/Products'
 import Product from './product/Product'
 import Item from './product/Item'
+import SubItem from './product/SubItem'
 import Vendors from './vendor/Vendors'
 import Brands from './brand/Brands'
 import Brand from './brand/Brand'
@@ -42,11 +43,12 @@ const routes = [
   {name: ['employeeType','r'],path: '/employee/type',component: EmployeeTypes},
   {name: ['employeeType','r'],path: '/employee/type/:typeId',component: EmployeeType},
   {name: ['employee','w'],path:'/employee/create',component: EmployeeCreate},
-  {name: ['category','r'],path:'/category',component: Category},
-  {name: ['product','r'],path:'/category/:catId',component: Products},
-  {name: ['item','r'],path:'/category/:catId/:proId',component: Product},
+  {name: ['categories','r'],path:'/category',component: Category},
+  {name: ['category','r'],path:'/category/:catId',component: Products},
+  {name: ['product','r'],path:'/category/:catId/:proId',component: Product},
   {name: ['import','w'],path:'/category/:catId/:proId/:itemId/import/:importId',component: CreateImport},
-  {name: ['subItem','r'],path:'/category/:catId/:proId/:itemId',component: Item},
+  {name: ['item','r'],path:'/category/:catId/:proId/:itemId',component: Item},
+  {name: ['subItem','r'],path:'/category/:catId/:proId/:itemId/:subItemId',component: SubItem},
   {name: ['vendor','r'],path:'/vendor',component: Vendors},
   {name: ['brand','r'],path:'/brand',component: Brands},
   {name: ['brand','r'],path:'/brand/:brandId',component: Brand},
