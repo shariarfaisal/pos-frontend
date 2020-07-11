@@ -16,6 +16,8 @@ import Profile from './profile/Profile'
 import Imports from './import/Imports'
 import Import from './import/Import'
 import CreateImport from './product/CreateImport'
+import ExportRequests from './export/Requests'
+import ExportRequest from './export/Request'
 
 const access = {
     "employeeType": "rwud",
@@ -56,6 +58,8 @@ const routes = [
   {name: ['profile','r'],path:'/profile',component: Profile},
   {name: ['import','r'],path:'/import',component: Imports},
   {name: ['import','r'],path:'/import/:importId',component: Import},
+  {name: ['exportRequest','r'],path:'/export/requests',component: ExportRequests},
+  {name: ['exportRequest','r'],path:'/export/requests/:reqId',component: ExportRequest},
 ]
 
 export default routes

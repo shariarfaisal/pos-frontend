@@ -31,7 +31,7 @@ const items = [
     {name:'Branches',link: '/branch'},
   ]},
   {name: 'Export',subItems:[
-    {name:'Create',link: ''},
+    {name:'Requests',link: '/export/requests'},
     {name:'Employees',link: ''},
   ]},
   {name: 'Import',subItems:[
